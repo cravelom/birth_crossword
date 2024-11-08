@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Annonce Naissance</title>
+    <title>Quel est le prénom ?</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -106,7 +106,7 @@
             margin: 0 10px;
             font-size: 16px;
             cursor: pointer;
-            background-color: #3498db;
+            background-color: #F50229;
             color: white;
             border: none;
             border-radius: 5px;
@@ -114,7 +114,7 @@
         }
 
         button:hover {
-            background-color: #2980b9;
+            background-color: #CA0223;
         }
 
         .definitions {
@@ -149,9 +149,30 @@
             padding: 40px;
             border-radius: 20px;
             text-align: center;
-            max-width: 80%;
+            max-width: 600px; /* Ajusté pour mieux correspondre à la taille de l'image */
+            width: 90%;
+            margin: 20px;
+            }
+    
+        .modal-content h2 {
+            margin: 10px 0;
+            color: #333;
         }
-
+        
+        .modal-content p {
+            color: #666;
+            font-style: italic;
+            margin: 20px 0;
+        }
+        
+        .modal-content img {
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .modal-content button {
+            margin-top: 20px;
+        }
         @media (max-width: 600px) {
             .cell {
                 width: 35px;
@@ -332,19 +353,20 @@
         }
 
         function afficherMessage() {
-            const modal = document.createElement('div');
-            modal.className = 'modal';
-            modal.innerHTML = `
-                <div class="modal-content">
-                    <h1>BRAVO, TU AS TROUVÉ LE PRÉNOM !</h1>
-                    <h2>Nous te présentons Ysé Alisoa FLEUROT RAVELOMANANA</h2>
-                    <h2>Née le 08/11/2024 à Paris</h2>
-                    <p>(Une petite crevette de 49cm et pesant 2,778kg)</p>
-                    <button onclick="this.parentElement.parentElement.remove()">Fermer</button>
-                </div>
-            `;
-            document.body.appendChild(modal);
-        }
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <h2>Nous te présentons</h2>
+                <h2>Ysé, Alisoa FLEUROT RAVELOMANANA</h2>
+                <h2>Née le 08/11/2024 à Paris</h2>
+                <p>(Une petite crevette de 49cm et pesant 2,778kg)</p>
+                <img src="https://i.imgur.com/ChI7a6r.gif" alt="Bébé" style="max-width: 100%; height: auto; margin: 20px auto; display: block;">
+                <button onclick="this.parentElement.parentElement.remove()">Fermer</button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
 
         function reinitialiser() {
             document.querySelectorAll('.letter, .solution-letter').forEach(input => {
