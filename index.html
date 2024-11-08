@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quel est le prénom ?</title>
+    <title>Annonce Naissance</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -32,24 +32,27 @@
         h1 {
             text-align: center;
             color: #333;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
+            font-size: 2.5em;
         }
 
         p {
             text-align: center;
             color: #666;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            font-size: 1.2em;
         }
 
         .crossword {
             border-collapse: collapse;
             margin: 20px auto;
+            background-color: white;
         }
 
         .cell {
-            width: 40px;
-            height: 40px;
-            border: 1px solid #000;
+            width: 45px;
+            height: 45px;
+            border: 1px solid #999;
             text-align: center;
             font-size: 20px;
             position: relative;
@@ -57,7 +60,7 @@
         }
 
         .black {
-            background-color: black;
+            background-color: #333333;
         }
 
         .tresor {
@@ -93,27 +96,13 @@
             margin-top: 20px;
         }
 
-        .definitions {
-            margin: 20px;
-            line-height: 1.6;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .definitions h3 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
-        }
-
         .buttons {
             text-align: center;
             margin: 20px 0;
         }
 
         button {
-            padding: 10px 20px;
+            padding: 12px 24px;
             margin: 0 10px;
             font-size: 16px;
             cursor: pointer;
@@ -126,6 +115,20 @@
 
         button:hover {
             background-color: #2980b9;
+        }
+
+        .definitions {
+            margin: 20px;
+            line-height: 1.6;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .definitions h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
         }
 
         .modal {
@@ -151,8 +154,8 @@
 
         @media (max-width: 600px) {
             .cell {
-                width: 30px;
-                height: 30px;
+                width: 35px;
+                height: 35px;
                 font-size: 16px;
             }
             
@@ -165,86 +168,74 @@
 </head>
 <body>
     <div class="main-container">
-        <div id="puzzleSection">
-            <h1>La famille s'agrandit !</h1>
-            <p>Devine son prénom en collectant les lettres trésors :)</p>
+        <h1>La famille s'agrandit !</h1>
+        <p>Devine son prénom en collectant les lettres trésors :)</p>
             
-            <table class="crossword">
-                <tr>
-                    <td class="cell black"></td>
-                    <td class="cell black"></td>
-                    <td class="cell"><div class="number">1</div><input type="text" class="letter" maxlength="1" data-correct="P"></td>
-                    <td class="cell black"></td>
-                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="B"></td>
-                </tr>
-                <tr>
-                    <td class="cell"><div class="number">2</div><input type="text" class="letter" maxlength="1" data-correct="M"></td>
-                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="A"></td>
-                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="E"></td>
-                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="V"></td>
-                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="A"></td>
-                </tr>
-                <tr>
-                    <td class="cell"><div class="number">3</div><input type="text" class="letter" maxlength="1" data-correct="H"></td>
-                    <td class="cell black"></td>
-                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="R"></td>
-                    <td class="cell black"></td>
-                    <td class="cell tresor"><input type="text" class="letter" maxlength="1" data-correct="Y" data-tresor="Y"></td>
-                </tr>
-                <tr>
-                    <td class="cell"><div class="number">4</div><input type="text" class="letter" maxlength="1" data-correct="C"></td>
-                    <td class="cell tresor"><input type="text" class="letter" maxlength="1" data-correct="E" data-tresor="E"></td>
-                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="D"></td>
-                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="R"></td>
-                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="I"></td>
-                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="C"></td>
-                </tr>
-                <tr>
-                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="T"></td>
-                    <td class="cell black"></td>
-                    <td class="cell tresor"><input type="text" class="letter" maxlength="1" data-correct="S" data-tresor="S"></td>
-                    <td class="cell black"></td>
-                    <td class="cell black"></td>
-                </tr>
-                <tr>
-                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="O"></td>
-                    <td class="cell black"></td>
-                    <td class="cell black"></td>
-                    <td class="cell black"></td>
-                    <td class="cell black"></td>
-                </tr>
-                <tr>
-                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="R"></td>
-                    <td class="cell black"></td>
-                    <td class="cell black"></td>
-                    <td class="cell black"></td>
-                    <td class="cell black"></td>
-                </tr>
-            </table>
+        <table class="crossword">
+            <tr>
+                <td class="cell black"></td>
+                <td class="cell black"></td>
+                <td class="cell"><div class="number">1</div><input type="text" class="letter" maxlength="1" data-correct="P"></td>
+                <td class="cell black"></td>
+                <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="B"></td>
+            </tr>
+            <tr>
+                <td class="cell"><div class="number">2</div><input type="text" class="letter" maxlength="1" data-correct="M"></td>
+                <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="A"></td>
+                <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="E"></td>
+                <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="V"></td>
+                <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="A"></td>
+            </tr>
+            <tr>
+                <td class="cell"><div class="number">3</div><input type="text" class="letter" maxlength="1" data-correct="H"></td>
+                <td class="cell black"></td>
+                <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="R"></td>
+                <td class="cell black"></td>
+                <td class="cell tresor"><input type="text" class="letter" maxlength="1" data-correct="Y" data-tresor="Y"></td>
+            </tr>
+            <tr>
+                <td class="cell"><div class="number">4</div><input type="text" class="letter" maxlength="1" data-correct="C"></td>
+                <td class="cell tresor"><input type="text" class="letter" maxlength="1" data-correct="E" data-tresor="E"></td>
+                <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="D"></td>
+                <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="R"></td>
+                <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="I"></td>
+                <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="C"></td>
+            </tr>
+            <tr>
+                <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="T"></td>
+                <td class="cell black"></td>
+                <td class="cell tresor"><input type="text" class="letter" maxlength="1" data-correct="S" data-tresor="S"></td>
+            </tr>
+            <tr>
+                <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="O"></td>
+            </tr>
+            <tr>
+                <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="R"></td>
+            </tr>
+        </table>
 
-            <table class="crossword" style="margin-top: 20px;">
-                <tr class="solution-row">
-                    <td class="cell"><input type="text" class="solution-letter" disabled data-position="0"></td>
-                    <td class="cell"><input type="text" class="solution-letter" disabled data-position="1"></td>
-                    <td class="cell"><input type="text" class="solution-letter" disabled data-position="2"></td>
-                </tr>
-            </table>
+        <table class="crossword" style="margin-top: 20px;">
+            <tr class="solution-row">
+                <td class="cell"><input type="text" class="solution-letter" disabled data-position="0"></td>
+                <td class="cell"><input type="text" class="solution-letter" disabled data-position="1"></td>
+                <td class="cell"><input type="text" class="solution-letter" disabled data-position="2"></td>
+            </tr>
+        </table>
 
-            <div class="buttons">
-                <button onclick="verifierReponses()">Vérifier</button>
-                <button onclick="reinitialiser()">Réinitialiser</button>
-            </div>
+        <div class="buttons">
+            <button onclick="verifierReponses()">Vérifier</button>
+            <button onclick="reinitialiser()">Réinitialiser</button>
+        </div>
 
-            <div class="definitions">
-                <h3>Horizontalement :</h3>
-                <p>2. Le prénom de la mère</p>
-                <p>4. Le prénom du père</p>
-                <p>5. C'est un bébé, en anglais</p>
+        <div class="definitions">
+            <h3>Horizontalement :</h3>
+            <p>2. Le prénom de la mère</p>
+            <p>4. Le prénom du père</p>
+            <p>5. C'est un bébé, en anglais</p>
 
-                <h3>Verticalement :</h3>
-                <p>1. Sa ville de naissance, comme sa mère et son frère</p>
-                <p>3. Le prénom du frère</p>
-            </div>
+            <h3>Verticalement :</h3>
+            <p>1. Sa ville de naissance, comme sa mère et son frère</p>
+            <p>3. Le prénom du frère</p>
         </div>
     </div>
 
@@ -309,7 +300,7 @@
                     <h1>BRAVO, TU AS TROUVÉ LE PRÉNOM !</h1>
                     <h2>Nous te présentons Ysé Alisoa FLEUROT RAVELOMANANA</h2>
                     <h2>Née le 08/11/2024 à Paris</h2>
-                    <p>(Une petite crevette de 49cm et qui pèse 2,778kg)
+                    <p>(Une petite crevette de 49cm et pesant 2,778kg)</p>
                     <button onclick="this.parentElement.parentElement.remove()">Fermer</button>
                 </div>
             `;
