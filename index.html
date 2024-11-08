@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quel est le prénom ?</title>
+    <style>
+        /* Styles généraux pour le fond */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-image: url('https://i.imgur.com/Wtv4mcO.png');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Boîte pour contenir le mot croisé centré */
+        .crossword-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            text-align: center;
+        }
+
+        /* Styles de la grille de mot croisé */
+        .crossword {
+            display: grid;
+            grid-template-columns: repeat(8, 40px); /* Ajuster la taille des colonnes */
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .cell {
+            width: 40px;
+            height: 40px;
+            border: 1px solid black;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .filled input {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            background-color: transparent;
+        }
+
+        .filled input:focus {
+            outline: none;
+            background-color: #e0f7fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="crossword-container">
+        <h1>Quel est le prénom ?</h1>
+        <div class="crossword">
+            <!-- Code de la grille du mot croisé ici (comme avant) -->
+            <div class="cell filled"><input type="text" maxlength="1" data-answer="M"></div>
+            <div class="cell filled"><input type="text" maxlength="1" data-answer="A"></div>
+            <div class="cell filled"><input type="text" maxlength="1" data-answer="E"></div>
+            <div class="cell filled"><input type="text" maxlength="1" data-answer="V"></div>
+            <div class="cell filled"><input type="text" maxlength="1" data-answer="A"></div>
+            <!-- Continue la grille ici -->
+        </div>
+        <button onclick="checkAnswers()">Vérifier les réponses</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            const cells = document.querySelectorAll('.filled input');
+            let allCorrect = true;
+
+            cells.forEach(cell => {
+                const answer = cell.getAttribute('data-answer');
+                if (cell.value.toUpperCase() !== answer) {
+                    cell.style.backgroundColor = '#f8d7da';
+                    allCorrect = false;
+                } else {
+                    cell.style.backgroundColor = '#d4edda';
+                }
+            });
+
+            const result = document.getElementById('result');
+            if (allCorrect) {
+                result.textContent = "Bravo ! Vous avez complété le mot croisé !";
+                result.style.color = 'green';
+            } else {
+                result.textContent = "Certaines réponses sont incorrectes. Essayez encore !";
+                result.style.color = 'red';
+            }
+        }
+    </script>
+</body>
+</html>
