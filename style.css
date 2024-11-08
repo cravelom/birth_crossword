@@ -1,15 +1,28 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
+  background: url('https://i.imgur.com/Wtv4mcO.png') no-repeat center center fixed;
+  background-size: cover;
 }
 
 h1 {
   color: #333;
 }
 
+.form-container {
+  margin: 20px 0;
+}
+
+.form-container input {
+  margin: 0 10px;
+  padding: 5px;
+}
+
 .crossword-container {
   display: inline-block;
   margin-top: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
 }
 
 .crossword {
@@ -21,6 +34,7 @@ h1 {
   height: 40px;
   text-align: center;
   border: 1px solid #000;
+  position: relative;
 }
 
 .input-cell input {
@@ -36,9 +50,18 @@ h1 {
   background-color: #eee;
 }
 
+.index {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  font-size: 0.8em;
+  color: #555;
+}
+
 .clues {
   text-align: left;
   margin-top: 20px;
+  display: inline-block;
 }
 
 button {
