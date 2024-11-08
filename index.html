@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Annonce Naissance</title>
+    <title>Quel est le prénom ?</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,33 +27,6 @@
             margin: 20px;
             max-width: 800px;
             width: 90%;
-        }
-
-        #formSection {
-            text-align: center;
-        }
-
-        #puzzleSection {
-            display: none;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-            margin-bottom: 10px;
         }
 
         h1 {
@@ -192,27 +165,9 @@
 </head>
 <body>
     <div class="main-container">
-        <!-- Section Formulaire -->
-        <div id="formSection">
-            <h1>La famille s'agrandit !</h1>
-            <p>Dis nous d'abord qui répond avant de deviner son prénom !</p>
-            <form id="identificationForm">
-                <div class="form-group">
-                    <label for="nom">Nom</label>
-                    <input type="text" id="nom" name="nom" required>
-                </div>
-                <div class="form-group">
-                    <label for="prenom">Prénom</label>
-                    <input type="text" id="prenom" name="prenom" required>
-                </div>
-                <button type="submit">Commencer le jeu</button>
-            </form>
-        </div>
-
-        <!-- Section Mots Croisés -->
         <div id="puzzleSection">
-            <h1>Quel est le prénom ?</h1>
-            <p>Devine son prénom en collectant les lettres trésors !</p>
+            <h1>La famille s'agrandit !</h1>
+            <p>Devine son prénom en collectant les lettres trésors :)</p>
             
             <table class="crossword">
                 <tr>
@@ -294,30 +249,6 @@
     </div>
 
     <script>
-        const form = document.getElementById('identificationForm');
-
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            
-            // Récupération des données du formulaire
-            const nom = document.getElementById('nom').value;
-            const prenom = document.getElementById('prenom').value;
-            
-            // Passage direct à la grille de mots croisés
-            document.getElementById('formSection').style.display = 'none';
-            document.getElementById('puzzleSection').style.display = 'block';
-            
-            // Envoi des données au script Google en arrière-plan
-            const formData = new FormData(form);
-            const scriptURL = 'https://script.google.com/macros/s/15gMEdICMhbaj7M1g0HREFzL_HuJw3gSfG07U6HrgIvW8-17rYX3U28Hs/exec';
-            
-            fetch(scriptURL, {
-                method: 'POST',
-                body: formData,
-                mode: 'no-cors'
-            }).catch(error => console.error('Error!', error.message));
-        });
-
         document.querySelectorAll('.letter').forEach(input => {
             input.addEventListener('input', function(e) {
                 if (this.value.length === this.maxLength) {
@@ -378,6 +309,7 @@
                     <h1>BRAVO, TU AS TROUVÉ LE PRÉNOM !</h1>
                     <h2>Nous te présentons Ysé Alisoa FLEUROT RAVELOMANANA</h2>
                     <h2>Née le 08/11/2024 à Paris</h2>
+                    <p>(Une petite crevette de 49cm et qui pèse 2,778kg)
                     <button onclick="this.parentElement.parentElement.remove()">Fermer</button>
                 </div>
             `;
