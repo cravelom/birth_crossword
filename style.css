@@ -1,76 +1,44 @@
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background: url('https://i.imgur.com/Wtv4mcO.png') no-repeat center center fixed;
-  background-size: cover;
+function submitForm() {
+  const firstName = document.getElementById('firstName').value;
+  const lastName = document.getElementById('lastName').value;
+  
+  if (firstName && lastName) {
+    fetch('https://script.google.com/macros/s/15gMEdICMhbaj7M1g0HREFzL_HuJw3gSfG07U6HrgIvW8-17rYX3U28Hs/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ firstName, lastName })
+    }).then(() => {
+      alert("Formulaire envoyé !");
+      document.getElementById('nameForm').style.display = 'none';
+    }).catch(error => {
+      alert("Erreur lors de l'envoi !");
+    });
+  } else {
+    alert("Merci de remplir tous les champs !");
+  }
 }
 
-h1 {
-  color: #333;
-}
+function checkAnswers() {
+  const cells = document.querySelectorAll('.input-cell');
+  let allCorrect = true;
 
-.form-container {
-  margin: 20px 0;
-}
+  cells.forEach(cell => {
+    const input = cell.querySelector('input');
+    if (input.value.toUpperCase() === cell.dataset.answer) {
+      input.style.color = 'green';
+    } else {
+      input.style.color = 'red';
+      allCorrect = false;
+    }
+  });
 
-.form-container input {
-  margin: 0 10px;
-  padding: 5px;
-}
-
-.crossword-container {
-  display: inline-block;
-  margin-top: 20px;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 20px;
-}
-
-.crossword {
-  border-collapse: collapse;
-}
-
-.crossword td {
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  border: 1px solid #000;
-  position: relative;
-}
-
-.input-cell input {
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  font-size: 1.2em;
-  border: none;
-  outline: none;
-}
-
-.empty {
-  background-color: #eee;
-}
-
-.index {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  font-size: 0.8em;
-  color: #555;
-}
-
-.clues {
-  text-align: left;
-  margin-top: 20px;
-  display: inline-block;
-}
-
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-}
-
-#result {
-  font-weight: bold;
-  color: green;
+  const result = document.getElementById('result');
+  if (allCorrect) {
+    result.textContent = "Bravo ! Vous avez trouvé tous les mots !";
+  } else {
+    result.textContent = "Il y a encore des erreurs. Essayez encore !";
+  }
 }
