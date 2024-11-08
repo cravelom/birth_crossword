@@ -1,198 +1,74 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quel est le prénom ?</title>
-    <style>
-        /* Mise en page et style du fond */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background-image: url('https://i.imgur.com/Wtv4mcO.png');
-            background-size: cover;
-            background-position: center;
-            font-family: Arial, sans-serif;
-        }
-
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            text-align: center;
-        }
-
-        /* Style du formulaire */
-        .form-group {
-            margin-bottom: 10px;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: bold;
-        }
-
-        .form-group input[type="text"] {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-        }
-
-        /* Style de la grille du mot croisé */
-        .crossword {
-            display: grid;
-            grid-template-columns: repeat(7, 40px);
-            gap: 2px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .cell {
-            width: 40px;
-            height: 40px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            border: 1px solid #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .number {
-            font-size: 10px;
-            position: absolute;
-            top: 2px;
-            left: 2px;
-        }
-
-        /* Style des indices */
-        .clues {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            text-align: left;
-        }
-
-        .clues div {
-            width: 45%;
-        }
-
-        .clues p {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quel est le prénom ?</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Formulaire pour nom et prénom -->
-        <form id="user-form">
-            <div class="form-group">
-                <label for="firstName">Prénom :</label>
-                <input type="text" id="firstName" name="firstName" required>
-            </div>
-            <div class="form-group">
-                <label for="lastName">Nom :</label>
-                <input type="text" id="lastName" name="lastName" required>
-            </div>
-            <button type="submit">Commencer</button>
-        </form>
+  <h1>Quel est le prénom ?</h1>
+  <div class="crossword-container">
+    <table class="crossword">
+      <tr>
+        <td class="empty"></td>
+        <td class="empty"></td>
+        <td class="input-cell" data-answer="H"><input type="text" maxlength="1"></td>
+        <td class="empty"></td>
+        <td class="empty"></td>
+      </tr>
+      <tr>
+        <td class="input-cell" data-answer="M"><input type="text" maxlength="1"></td>
+        <td class="input-cell" data-answer="A"><input type="text" maxlength="1"></td>
+        <td class="input-cell" data-answer="E"><input type="text" maxlength="1"></td>
+        <td class="input-cell" data-answer="V"><input type="text" maxlength="1"></td>
+        <td class="input-cell" data-answer="A"><input type="text" maxlength="1"></td>
+      </tr>
+      <tr>
+        <td class="empty"></td>
+        <td class="empty"></td>
+        <td class="input-cell" data-answer="C"><input type="text" maxlength="1"></td>
+        <td class="empty"></td>
+        <td class="empty"></td>
+      </tr>
+      <tr>
+        <td class="input-cell" data-answer="B"><input type="text" maxlength="1"></td>
+        <td class="input-cell" data-answer="A"><input type="text" maxlength="1"></td>
+        <td class="input-cell" data-answer="B"><input type="text" maxlength="1"></td>
+        <td class="input-cell" data-answer="Y"><input type="text" maxlength="1"></td>
+        <td class="empty"></td>
+      </tr>
+      <tr>
+        <td class="empty"></td>
+        <td class="empty"></td>
+        <td class="input-cell" data-answer="T"><input type="text" maxlength="1"></td>
+        <td class="empty"></td>
+        <td class="empty"></td>
+      </tr>
+      <tr>
+        <td class="input-cell" data-answer="C"><input type="text" maxlength="1"></td>
+        <td class="input-cell" data-answer="É"><input type="text" maxlength="1"></td>
+        <td class="input-cell" data-answer="D"><input type="text" maxlength="1"></td>
+        <td class="input-cell" data-answer="R"><input type="text" maxlength="1"></td>
+        <td class="input-cell" data-answer="I"><input type="text" maxlength="1"></td>
+        <td class="input-cell" data-answer="C"><input type="text" maxlength="1"></td>
+      </tr>
+    </table>
+  </div>
 
-        <!-- Grille du mot croisé -->
-        <div id="crossword" class="crossword" style="display: none;">
-            <div class="cell"><div class="number">1</div>H</div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
+  <div class="clues">
+    <h2>Horizontaux :</h2>
+    <p><strong>2.</strong> Le prénom de la maman</p>
+    <p><strong>3.</strong> C'est un bébé, en anglais</p>
+    <p><strong>5.</strong> Le prénom du papa</p>
+    <h2>Verticaux :</h2>
+    <p><strong>1.</strong> Le prénom du frère</p>
+    <p><strong>4.</strong> Son prénom</p>
+  </div>
 
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"><div class="number">2</div>M</div>
-            <div class="cell">A</div>
-            <div class="cell">E</div>
-            <div class="cell">V</div>
-            <div class="cell">A</div>
+  <button onclick="checkAnswers()">Vérifier les réponses</button>
+  <p id="result"></p>
 
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell">C</div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"><div class="number">3</div>B</div>
-            <div class="cell">A</div>
-            <div class="cell">B</div>
-            <div class="cell">Y</div>
-            <div class="cell"></div>
-
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell">T</div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell">O</div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-
-            <div class="cell"></div>
-            <div class="cell"><div class="number">5</div>C</div>
-            <div class="cell">É</div>
-            <div class="cell">D</div>
-            <div class="cell">R</div>
-            <div class="cell">I</div>
-            <div class="cell">C</div>
-        </div>
-
-        <!-- Indices -->
-        <div class="clues" style="display: none;">
-            <div>
-                <p><strong>Horizontaux :</strong></p>
-                <p><strong>2.</strong> Le prénom de la maman</p>
-                <p><strong>3.</strong> Pratique pour la ramener à la maison</p>
-                <p><strong>5.</strong> Le prénom du papa</p>
-            </div>
-            <div>
-                <p><strong>Verticaux :</strong></p>
-                <p><strong>1.</strong> Le prénom du frère</p>
-                <p><strong>4.</strong> Son prénom</p>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Affiche la grille et les indices après le formulaire
-        document.getElementById("user-form").addEventListener("submit", function(event) {
-            event.preventDefault();
-            document.getElementById("crossword").style.display = "grid";
-            document.querySelector(".clues").style.display = "block";
-            document.getElementById("user-form").style.display = "none";
-
-            // Récupère le nom et prénom
-            const firstName = document.getElementById("firstName").value;
-            const lastName = document.getElementById("lastName").value;
-            console.log("Nom et Prénom du participant :", firstName, lastName);
-        });
-    </script>
+  <script src="script.js"></script>
 </body>
 </html>
