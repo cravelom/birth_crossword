@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quel est le prénom ?</title>
     <style>
-        /* Styles généraux pour le fond */
+        /* Mise en page et style du fond */
         body {
             display: flex;
             justify-content: center;
@@ -18,7 +18,6 @@
             font-family: Arial, sans-serif;
         }
 
-        /* Boîte pour contenir le formulaire et la grille du mot croisé */
         .container {
             background-color: white;
             padding: 20px;
@@ -28,131 +27,172 @@
             text-align: center;
         }
 
-        /* Styles pour le formulaire */
+        /* Style du formulaire */
         .form-group {
             margin-bottom: 10px;
-        }
-        
-        input[type="text"] {
-            padding: 8px;
-            font-size: 16px;
-            width: 80%;
-            margin-bottom: 15px;
+            text-align: left;
         }
 
-        /* Styles de la grille de mot croisé */
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        /* Style de la grille du mot croisé */
         .crossword {
             display: grid;
-            grid-template-columns: repeat(8, 40px); /* Ajuster la taille des colonnes */
-            gap: 5px;
+            grid-template-columns: repeat(7, 40px);
+            gap: 2px;
             justify-content: center;
+            margin-top: 20px;
         }
 
         .cell {
             width: 40px;
             height: 40px;
-            border: 1px solid black;
             text-align: center;
-            vertical-align: middle;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
+            border: 1px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* Styles pour les cases interactives */
-        .filled input {
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
-            border: none;
-            background-color: transparent;
+        .number {
+            font-size: 10px;
+            position: absolute;
+            top: 2px;
+            left: 2px;
         }
 
-        .filled input:focus {
-            outline: none;
-            background-color: #e0f7fa;
+        /* Style des indices */
+        .clues {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .clues div {
+            width: 45%;
+        }
+
+        .clues p {
+            font-weight: bold;
+            margin-bottom: 5px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Quel est le prénom ?</h1>
-
         <!-- Formulaire pour nom et prénom -->
-        <form id="userForm" onsubmit="event.preventDefault(); submitForm();">
+        <form id="user-form">
             <div class="form-group">
-                <label for="firstName">Prénom :</label><br>
-                <input type="text" id="firstName" required>
+                <label for="firstName">Prénom :</label>
+                <input type="text" id="firstName" name="firstName" required>
             </div>
             <div class="form-group">
-                <label for="lastName">Nom :</label><br>
-                <input type="text" id="lastName" required>
+                <label for="lastName">Nom :</label>
+                <input type="text" id="lastName" name="lastName" required>
             </div>
-            <button type="submit">Commencer le mot croisé</button>
+            <button type="submit">Commencer</button>
         </form>
 
-        <!-- Section du mot croisé, masquée au départ -->
-        <div id="crosswordSection" style="display: none;">
-            <div class="crossword">
-                <!-- Code de la grille du mot croisé ici -->
-                <div class="cell filled"><input type="text" maxlength="1" data-answer="M"></div>
-                <div class="cell filled"><input type="text" maxlength="1" data-answer="A"></div>
-                <div class="cell filled"><input type="text" maxlength="1" data-answer="E"></div>
-                <div class="cell filled"><input type="text" maxlength="1" data-answer="V"></div>
-                <div class="cell filled"><input type="text" maxlength="1" data-answer="A"></div>
-                <!-- Continue la grille ici en fonction de tes mots -->
+        <!-- Grille du mot croisé -->
+        <div id="crossword" class="crossword" style="display: none;">
+            <div class="cell"><div class="number">1</div>H</div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"><div class="number">2</div>M</div>
+            <div class="cell">A</div>
+            <div class="cell">E</div>
+            <div class="cell">V</div>
+            <div class="cell">A</div>
+
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell">C</div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"><div class="number">3</div>B</div>
+            <div class="cell">A</div>
+            <div class="cell">B</div>
+            <div class="cell">Y</div>
+            <div class="cell"></div>
+
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell">T</div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell">O</div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+
+            <div class="cell"></div>
+            <div class="cell"><div class="number">5</div>C</div>
+            <div class="cell">É</div>
+            <div class="cell">D</div>
+            <div class="cell">R</div>
+            <div class="cell">I</div>
+            <div class="cell">C</div>
+        </div>
+
+        <!-- Indices -->
+        <div class="clues" style="display: none;">
+            <div>
+                <p><strong>Horizontaux :</strong></p>
+                <p><strong>2.</strong> Le prénom de la maman</p>
+                <p><strong>3.</strong> Pratique pour la ramener à la maison</p>
+                <p><strong>5.</strong> Le prénom du papa</p>
             </div>
-            <button onclick="checkAnswers()">Vérifier les réponses</button>
-            <p id="result"></p>
+            <div>
+                <p><strong>Verticaux :</strong></p>
+                <p><strong>1.</strong> Le prénom du frère</p>
+                <p><strong>4.</strong> Son prénom</p>
+            </div>
         </div>
     </div>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwGX3L54puNVZ2DBnrsgRHWYHN4mmrqinWc25IuBeEWGKv2g7MZFBFclHhCOZHYYeGLEg/exec'; // Remplacez par l'URL de votre script Apps Script
+        // Affiche la grille et les indices après le formulaire
+        document.getElementById("user-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            document.getElementById("crossword").style.display = "grid";
+            document.querySelector(".clues").style.display = "block";
+            document.getElementById("user-form").style.display = "none";
 
-        function submitForm() {
-            const firstName = document.getElementById('firstName').value;
-            const lastName = document.getElementById('lastName').value;
-
-            fetch(scriptURL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ firstName, lastName })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    document.getElementById('userForm').style.display = 'none';
-                    document.getElementById('crosswordSection').style.display = 'block';
-                }
-            })
-            .catch(error => console.error('Erreur:', error));
-        }
-
-        function checkAnswers() {
-            const cells = document.querySelectorAll('.filled input');
-            let allCorrect = true;
-
-            cells.forEach(cell => {
-                const answer = cell.getAttribute('data-answer');
-                if (cell.value.toUpperCase() !== answer) {
-                    cell.style.backgroundColor = '#f8d7da';
-                    allCorrect = false;
-                } else {
-                    cell.style.backgroundColor = '#d4edda';
-                }
-            });
-
-            const result = document.getElementById('result');
-            if (allCorrect) {
-                result.textContent = "Bravo ! Vous avez complété le mot croisé !";
-                result.style.color = 'green';
-            } else {
-                result.textContent = "Certaines réponses sont incorrectes. Essayez encore !";
-                result.style.color = 'red';
-            }
-        }
+            // Récupère le nom et prénom
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            console.log("Nom et Prénom du participant :", firstName, lastName);
+        });
     </script>
 </body>
 </html>
