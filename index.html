@@ -1,90 +1,324 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quel est le prénom ?</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quel est son prénom ?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-image: url('https://i.imgur.com/OEMdC3x.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            margin: 20px;
+            max-width: 800px;
+            width: 90%;
+        }
+
+        #formSection {
+            text-align: center;
+        }
+
+        #puzzleSection {
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .crossword {
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        .cell {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #000;
+            text-align: center;
+            font-size: 20px;
+            position: relative;
+            background-color: white;
+        }
+
+        .black {
+            background-color: black;
+        }
+
+        .number {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        input.letter {
+            width: 100%;
+            height: 100%;
+            border: none;
+            text-align: center;
+            font-size: 20px;
+            text-transform: uppercase;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            background: transparent;
+        }
+
+        input.letter:focus {
+            outline: 2px solid #3498db;
+        }
+
+        .definitions {
+            margin: 20px;
+            line-height: 1.6;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .definitions h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        @media (max-width: 600px) {
+            .cell {
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+            }
+            
+            .main-container {
+                padding: 20px;
+                margin: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Quel est le prénom ?</h1>
+    <div class="main-container">
+        <!-- Section Formulaire -->
+        <div id="formSection">
+            <h1>Hello !</h1>
+            <p>Envie de connaître le prénom de la soeur d'Hector ? Dis nous d'abord qui répond :)</p>
+            <form id="identificationForm">
+                <div class="form-group">
+                    <label for="nom">Nom</label>
+                    <input type="text" id="nom" name="nom" required>
+                </div>
+                <div class="form-group">
+                    <label for="prenom">Prénom</label>
+                    <input type="text" id="prenom" name="prenom" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <button type="submit">Commencer le jeu</button>
+            </form>
+        </div>
 
-  <!-- Formulaire pour nom et prénom -->
-  <div class="form-container">
-    <form id="nameForm">
-      <label for="firstName">Prénom :</label>
-      <input type="text" id="firstName" name="firstName" required>
-      <label for="lastName">Nom :</label>
-      <input type="text" id="lastName" name="lastName" required>
-      <button type="button" onclick="submitForm()">Envoyer</button>
-    </form>
-  </div>
+        <!-- Section Mots Croisés -->
+        <div id="puzzleSection">
+            <h1>Quel est le prénom ?</h1>
+            
+            <table class="crossword">
+                <tr>
+                    <td class="cell black"></td>
+                    <td class="cell black"></td>
+                    <td class="cell"><div class="number">1</div><input type="text" class="letter" maxlength="1" data-correct="P"></td>
+                    <td class="cell black"></td>
+                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="B"></td>
+                </tr>
+                <tr>
+                    <td class="cell"><div class="number">2</div><input type="text" class="letter" maxlength="1" data-correct="M"></td>
+                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="A"></td>
+                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="E"></td>
+                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="V"></td>
+                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="A"></td>
+                </tr>
+                <tr>
+                    <td class="cell"><div class="number">3</div><input type="text" class="letter" maxlength="1" data-correct="H"></td>
+                    <td class="cell black"></td>
+                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="R"></td>
+                    <td class="cell black"></td>
+                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="B"></td>
+                </tr>
+                <tr>
+                    <td class="cell"><div class="number">4</div><input type="text" class="letter" maxlength="1" data-correct="C"></td>
+                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="E"></td>
+                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="D"></td>
+                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="R"></td>
+                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="I"></td>
+                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="C"></td>
+                </tr>
+                <tr>
+                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="T"></td>
+                    <td class="cell black"></td>
+                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="S"></td>
+                    <td class="cell black"></td>
+                    <td class="cell black"></td>
+                </tr>
+                <tr>
+                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="O"></td>
+                    <td class="cell black"></td>
+                    <td class="cell black"></td>
+                    <td class="cell black"></td>
+                    <td class="cell black"></td>
+                </tr>
+                <tr>
+                    <td class="cell"><input type="text" class="letter" maxlength="1" data-correct="R"></td>
+                    <td class="cell black"></td>
+                    <td class="cell black"></td>
+                    <td class="cell black"></td>
+                    <td class="cell black"></td>
+                </tr>
+            </table>
 
-  <!-- Grille de mots croisés -->
-  <div class="crossword-container">
-    <table class="crossword">
-      <tr>
-        <td class="input-cell" data-answer="H"><span class="index">1</span><input type="text" maxlength="1"></td>
-        <td class="empty"></td>
-        <td class="input-cell" data-answer="M"><span class="index">2</span><input type="text" maxlength="1"></td>
-        <td class="input-cell" data-answer="A"><input type="text" maxlength="1"></td>
-        <td class="input-cell" data-answer="E"><input type="text" maxlength="1"></td>
-        <td class="input-cell" data-answer="V"><input type="text" maxlength="1"></td>
-        <td class="input-cell" data-answer="A"><input type="text" maxlength="1"></td>
-      </tr>
-      <tr>
-        <td class="input-cell" data-answer="E"><input type="text" maxlength="1"></td>
-        <td class="empty"></td>
-        <td class="input-cell" data-answer="C"><input type="text" maxlength="1"></td>
-        <td class="empty"></td>
-        <td class="empty"></td>
-        <td class="empty"></td>
-      </tr>
-      <tr>
-        <td class="input-cell" data-answer="C"><input type="text" maxlength="1"></td>
-        <td class="empty"></td>
-        <td class="input-cell" data-answer="B"><span class="index">3</span><input type="text" maxlength="1"></td>
-        <td class="input-cell" data-answer="A"><input type="text" maxlength="1"></td>
-        <td class="input-cell" data-answer="B"><input type="text" maxlength="1"></td>
-        <td class="input-cell" data-answer="Y"><input type="text" maxlength="1"></td>
-      </tr>
-      <tr>
-        <td class="input-cell" data-answer="T"><input type="text" maxlength="1"></td>
-        <td class="empty"></td>
-        <td class="input-cell" data-answer="Y"><span class="index">4</span><input type="text" maxlength="1"></td>
-        <td class="input-cell" data-answer="S"><input type="text" maxlength="1"></td>
-        <td class="input-cell" data-answer="É"><input type="text" maxlength="1"></td>
-      </tr>
-      <tr>
-        <td class="input-cell" data-answer="O"><input type="text" maxlength="1"></td>
-        <td class="empty"></td>
-        <td class="input-cell" data-answer="C"><span class="index">5</span><input type="text" maxlength="1"></td>
-        <td class="input-cell" data-answer="É"><input type="text" maxlength="1"></td>
-        <td class="input-cell" data-answer="D"><input type="text" maxlength="1"></td>
-        <td class="input-cell" data-answer="R"><input type="text" maxlength="1"></td>
-      </tr>
-      <tr>
-        <td class="input-cell" data-answer="R"><input type="text" maxlength="1"></td>
-        <td class="empty"></td>
-        <td class="input-cell" data-answer="I"><input type="text" maxlength="1"></td>
-        <td class="input-cell" data-answer="C"><input type="text" maxlength="1"></td>
-      </tr>
-    </table>
-  </div>
+            <div class="buttons">
+                <button onclick="verifierReponses()">Vérifier</button>
+                <button onclick="reinitialiser()">Réinitialiser</button>
+            </div>
 
-  <div class="clues">
-    <h2>Horizontaux :</h2>
-    <p><strong>2.</strong> Le prénom de la maman</p>
-    <p><strong>3.</strong> C'est un bébé, en anglais</p>
-    <p><strong>5.</strong> Le prénom du papa</p>
-    <h2>Verticaux :</h2>
-    <p><strong>1.</strong> Le prénom du frère</p>
-    <p><strong>4.</strong> Son prénom</p>
-  </div>
+            <div class="definitions">
+                <h3>Horizontalement :</h3>
+                <p>2. Le prénom de la mère</p>
+                <p>4. Le prénom du père</p>
+                <p>5. C'est un bébé, en anglais</p>
 
-  <button onclick="checkAnswers()">Vérifier les réponses</button>
-  <p id="result"></p>
+                <h3>Verticalement :</h3>
+                <p>1. Sa ville de naissance, comme sa mère et son frère</p>
+                <p>3. Le prénom du frère</p>
+            </div>
+        </div>
+    </div>
 
-  <script src="script.js"></script>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/15gMEdICMhbaj7M1g0HREFzL_HuJw3gSfG07U6HrgIvW8-17rYX3U28Hs/exec';
+        const form = document.getElementById('identificationForm');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => {
+                    if (response.ok) {
+                        document.getElementById('formSection').style.display = 'none';
+                        document.getElementById('puzzleSection').style.display = 'block';
+                    } else {
+                        alert('Une erreur est survenue. Veuillez réessayer.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    alert('Une erreur est survenue. Veuillez réessayer.');
+                });
+        });
+
+        // Déplacement automatique au champ suivant
+        document.querySelectorAll('.letter').forEach(input => {
+            input.addEventListener('input', function(e) {
+                if (this.value.length === this.maxLength) {
+                    let next = this.parentElement.nextElementSibling;
+                    while (next && (!next.querySelector('.letter') || next.classList.contains('black'))) {
+                        next = next.nextElementSibling;
+                    }
+                    if (next) next.querySelector('.letter').focus();
+                }
+            });
+        });
+
+        // Fonction de vérification des réponses
+        function verifierReponses() {
+            const inputs = document.querySelectorAll('.letter');
+            let toutCorrect = true;
+
+            inputs.forEach(input => {
+                const reponseCorrecte = input.dataset.correct;
+                const reponseUtilisateur = input.value.toUpperCase();
+
+                if (reponseUtilisateur === reponseCorrecte) {
+                    input.style.color = 'green';
+                } else if (reponseUtilisateur !== '') {
+                    input.style.color = 'red';
+                    toutCorrect = false;
+                }
+            });
+
+            if (toutCorrect) {
+                alert('Félicitations ! Toutes les réponses sont correctes !');
+            }
+        }
+
+        // Fonction de réinitialisation
+        function reinitialiser() {
+            document.querySelectorAll('.letter').forEach(input => {
+                input.value = '';
+                input.style.color = 'black';
+            });
+        }
+    </script>
 </body>
 </html>
